@@ -53,7 +53,12 @@ runAnalysis <- function() {
   # 1. Merge the training and data set into one. Assign meaningful column names and classes. 
   message("... merge of datasets ...")
   dt <- data.frame()
-  dt <- mergeRawData(dt, rawDataDirName) #, "test", "training")
+  # Merge of all columns from the test files: 
+  dt <- mergeRawData(dt, rawDataDirName, "test")
+  # Merge all cols from the train files, add rows to complete set: 
+  dt <- rbind(dt, mergeRawData(dt, rawDataDirName, "train"))
+  
+  # 
   
   # Make the tidy data file: 
   message("... generating tidy data set ...")
@@ -67,8 +72,18 @@ runAnalysis <- function() {
 } # runAnalysis()
 
 
-mergeRawData <- function(dt, rawDataDirName)  {
+mergeRawData <- function(dt, dirName, setName)  {
   
+  dt <- read.table(file.path(dirName, setName, paste0("subject_", setName, ".txt")), 
+                   col.names = "subjectID", comment.char = "")
+  dt <- cbind(dt, 
+              read.table(file.path(dirName, setName, paste0("y_", setName, ".txt")), 
+                         col.names = "activity", comment.char = "") )
+  # Load activity labels and convert dt$activity: 
+  actDT <- read.table(file.path(dirName, "activity_labels.txt"), 
+                      col.names = c("ID", "label"), comment.char = "")
+  # Last 3 parameter in 'factor()' to keep column order and level mapping: 
+  dt$activity <- factor(dt$activity, actDT$ID, actDT$label, ordered = FALSE)
   
   return(dt)
 }
