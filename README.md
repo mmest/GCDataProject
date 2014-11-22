@@ -1,4 +1,4 @@
-
+#README
 
 
 ##Files overview
@@ -6,18 +6,20 @@
 The following is not part of the run_analysis.R procedure. I have run a few operating system commands and an R script to look at important characteristics of the input file. 
 
 ###Summary: 
-activity_labels.txt		2 columns: id and activity name; 6 rows. 
-features.txt			2 columns: id and feature name; 561 rows
+
+    activity_labels.txt		2 columns: id and activity name; 6 rows. 
+    features.txt			2 columns: id and feature name; 561 rows
 
 Files in test/ have 2497 rows, those in train/ have 7352 (30/70 split): 
-subject_test.txt,		 
-subject_train.txt		1 column: subject id.
-X_test.txt, X_train		561 cols: one for each feature; 
-						the rows are observation for each row in subject_test.txt
-y_test.txt, y_train.txt	1 col: activity id (1:6) as in activity_labels.txt
+
+    subject_test.txt,		 
+    subject_train.txt		1 column: subject id.
+    X_test.txt, X_train		561 cols: one for each feature; 
+    						the rows are observation for each row in subject_test.txt
+    y_test.txt, y_train.txt	1 col: activity id (1:6) as in activity_labels.txt
 
 The above fits with the discussion and diagram on the Coursera forums, see: 
-<a ref="https://class.coursera.org/getdata-009/forum/thread?thread_id=58#comment-369>comment</a>
+[this comment](https://class.coursera.org/getdata-009/forum/thread?thread_id=58#comment-369)
 
 ###Method: 
 
