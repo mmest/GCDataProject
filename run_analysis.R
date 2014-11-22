@@ -11,17 +11,26 @@ message("Run 'cleanUpData()' to remove the raw data set. (NOT run at end of 'run
 ## 
 getData <- function(rawDataDirName = "UCI HAR Dataset",  
                     rawDataURL = "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip") {
+  message("Checking for raw data...")
+  
   if (!file.exists(rawDataDirName)) {
-    tmpZippedFile = tempfile(pattern = "GCDataTemp_", tmpdir = ".")
+    
     message("Downloading file from: ", rawDataURL)
+    tmpZippedFile = tempfile(pattern = "GCDataTemp_", tmpdir = ".")
     download.file(rawDataURL, destfile = tmpZippedFile, method = "curl")
+    
     message("Unzipping file: ", tmpZippedFile)
     unzip(tmpZippedFile)
+    
     message("Removing file: ", tmpZippedFile)
     file.remove(tmpZippedFile)
+    
+  } else {
+    message("Raw data directory already exists: ", rawDataDirName)
   }
   return(rawDataDirName) 
-}
+} # getData()
+
 
 ## Function'cleanUpData()' removes the raw data directory. 
 ##
@@ -31,6 +40,45 @@ cleanUpData <- function(rawDataDirName = "UCI HAR Dataset") {
     unlink(rawDataDirName, recursive = TRUE, force = TRUE)
   }
 }
+
+
+## Function 'runAnalysis() 
+runAnalysis <- function() {
+  
+  # Make sure we have the raw data: 
+  message("Start of analysis run...")
+  rawDataDirName <- getData()   
+  message("... raw data is in: ", rawDataDirName)
+  
+  # 1. Merge the training and data set into one. Assign meaningful column names and classes. 
+  message("... merge of datasets ...")
+  dt <- data.frame()
+  dt <- mergeRawData(dt, rawDataDirName) #, "test", "training")
+  
+  # Make the tidy data file: 
+  message("... generating tidy data set ...")
+  
+  message("... witing tidy data file ...")
+  tidyFileName <- writeTidyFile(dt)
+  
+  message("... END RUN. Tidy data is in: ", tidyFileName)
+  return(tidyFileName)
+  
+} # runAnalysis()
+
+
+mergeRawData <- function(dt, rawDataDirName)  {
+  
+  
+  return(dt)
+}
+
+
+writeTidyFile <- function(dt, tidyFileName = "tidy_data.txt") {
+  
+  return(tidyFileName)
+}
+
 
 ## Function 'countFileFields()' prints a table of filenames / fields counts.
 ## 
