@@ -5,6 +5,10 @@ message("Run 'runAnalysis()' to restructure the course project raw data set. (It
 message("Run 'getData()' to download the data ONLY. (It does not replace an existing data set.)")
 message("Run 'cleanUpData()' to remove the raw data set. (NOT run at end of 'runAnalyis()'. Manual clean-up only.)")
 
+# From RStudio, run 
+#     View(read.table("tidy_data.txt", header = TRUE, quote = "\"", sep = "\t"))
+# to see results. 
+
 ## Function 'getData()' downloads the raw data if not already available in the current directory.
 ## 
 ## Returns the raw data directory name. 
@@ -92,14 +96,13 @@ runAnalysis <- function() {
   message("... raw data is in: ", rawDataDirName)
   
   # 1. Merge the training and data set into one. 
-  # 4 .Assign meaningful column names and classes. 
   message("... merge of datasets ...")
   dt <- data.frame()
   message( "... merge of all columns from the test files ..." )
   dt <- mergeRawData(dt, rawDataDirName, "test")
   message("... merge all cols from the train files, add rows to combined data frame ...")
   message(" ... this will take time ...")
-###TEST  dt <- rbind(dt, mergeRawData(dt, rawDataDirName, "train"))
+  dt <- rbind(dt, mergeRawData(dt, rawDataDirName, "train"))
   
   # 2. Extracts the measurements on the mean and standard deviation for each measurement:
   message("... reducing data frame to mean() and std() measurements ...")
@@ -113,7 +116,10 @@ runAnalysis <- function() {
   # levels match the descriptive labels from the file: 
   dt$activity <- factor(dt$activity, actDT$ID, actDT$label, ordered = FALSE)
   
-  # 5. Make the tidy data file: 
+  # 4.Assign meaningful column names and classes. 
+  #   Done already by assigning col names in 'mergeRawData()'. 
+
+  # 5. Make the tidy data with the average of each variable for each activity and each subject: 
   message("... generating tidy data set ...")
   dt <- makeTidy(dt)
   message("... witing tidy data file ...")
@@ -124,6 +130,14 @@ runAnalysis <- function() {
 } # runAnalysis()
 
 makeTidy <- function(dt) {
+  if (!isTRUE(require(plyr))) 
+      install.packages("plyr")
+  library(plyr)
+  
+  # Split data frame on subject and activity, applies 'mean()' column-wise on unsplitted: 
+  dt <- ddply(dt, c("subjectID", "activity"), numcolwise(mean))
+  # Prefix 'Averaged.' to all column names but subject and activity: 
+  names(dt)[ -c(1, 2) ] <- paste0("Averaged.", names(dt)[ -c(1, 2) ])
   
   return(dt)
 }
