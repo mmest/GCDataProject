@@ -42,7 +42,7 @@ If you source the script, it will just show you how a list of R functions to run
 
 ### Script Overview: 
 
-The goal, intent and the data manipulation overview are in the [CodeBook](./CodeBook.md), i suggest to read that first. The fine details of processing are in the code comments in the script. Here I give the general overview fo the script. 
+The goal, intent and the data manipulation overview are in the [CodeBook](./CodeBook.md), _Please_ do read that first. The fine details of processing are in the code comments in the script. Here I give the general overview of the script. 
 
 The project requires of the script  5 manipulations of the original data, more or less in this order: 
  
@@ -56,10 +56,19 @@ The project requires of the script  5 manipulations of the original data, more o
 
 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
+Function runAnalysis() does all five. 
 
+Steps 1 and 4 are mostly done together. Function mergeRawData() looks at the files and collates them by columns. It also assigns sensible column names to the collated data frame while loading from storage. It is called twice, on test and train, and the resulting data frames are combined by rows. 
 
+Since, the feature names are useful also in step 2 to select the columns of interest, mergeRawData() stores the (normalised) column names for the features in a small data frame 'ftDT'. A trick with operator <<- makes the feature names available to other calls of mergeRawData(), -- so as not to load them more than once, and to the scope of runAnalysis() itself. (Just to try it, there are many other ways to do that.) 
 
+Step 3 could be done before or after 3, as it only modifies the values in the 'activity' column. In runAnalysis() this is done by loading the feature names from feature.txt and converting the column to a factor. The call to factor() needs those exact parameters so as not to change neither the mapping from number to activity, nor the ordering of the column. 
 
+Step 5 is just one line with ddplyr(): my heartfelt thanks to the people who mentioned ddplyr() in the forums. Just read the help and set the right parameters and function. 
+
+A little bit of step 4 is done last, to give reasonable names to the averaged variabels. 
+
+Downloading the original data and writing the results are obvious from the code, I hope. 
 
 
 
