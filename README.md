@@ -40,9 +40,24 @@ If you source the script, it will just show you how a list of R functions to run
      Run 'cleanUpData()' to remove the raw data set. (NOT run at end of 'runAnalyis()'. Manual clean-up only.)
      > 
 
-### Script overview: 
+### Script Overview: 
 
-The fine details are in the code comments in the script. Here I give the general overview: 
+The goal, intent and the data manipulation overview are in the [CodeBook](./CodeBook.md), i suggest to read that first. The fine details of processing are in the code comments in the script. Here I give the general overview fo the script. 
+
+The project requires of the script  5 manipulations of the original data, more or less in this order: 
+ 
+1. Merges the training and the test sets to create one data set.
+
+2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+
+3. Uses descriptive activity names to name the activities in the data set. 
+
+4. Appropriately labels the data set with descriptive variable names. 
+
+5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
+
+
+
 
 
 

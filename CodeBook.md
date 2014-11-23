@@ -26,7 +26,7 @@ It is a table of 180 observations of 81 variables: 30 subjects x 6 activities wi
          5 STANDING
          6 LAYING
 
-*  79 variables: numerical, with names starting with '__Averaged.'__. See section _List of variables: tidy vs. original_ below for how the averaged column names were generated. 
+*  79 variables: numerical, with names starting with __Averaged.__. See section _List of variables: tidy vs. original_ below for how the averaged column names were generated. 
 
          "Averaged.tBodyAcc.mean.X"
          "Averaged.tBodyAcc.mean.Y"
@@ -111,7 +111,7 @@ It is a table of 180 observations of 81 variables: 30 subjects x 6 activities wi
 
 ## Data manipulation
 
-The _original data_ is splitted in several files which contain more than 10,000 observation lines in total. The observation are splitted (30% / 70%0 in two sets of files the  ..._train.txt files are for training of a learning algorithm, the ..._test.txt files are used for testing it. The two sets have the same variables, e.g. same number of columns, which are partitioned into a few file as well ('*' below is be either 'train' or 'test'): 
+The _original data_ is splitted in several files which contain more than 10,000 observation lines in total. The observation are splitted (30% / 70%) in two sets of files the  ..._train.txt files are for training of a learning algorithm, the ..._test.txt files are used for testing it. The two sets have the same variables, e.g. same number of columns, which are partitioned into a few files as well ('*' below is be either 'train' or 'test'): 
 
 * subject_*.txt : 1 column with the (human) subject ID. Translated as 'subjectID' in tidy data. No header. 
 
@@ -123,18 +123,18 @@ The _original data_ is splitted in several files which contain more than 10,000 
 
 * features.txt : 2 columns: id and feature name; 561 rows, one for each measure/feature in the X_*.txt files. Common to both sets, it is the list of names for the measurements. 
 
-In short: the original data is a single table of observation which has been split by columns in the subject_, X_, and y_ files, and further partitioned by row with the 'test' and 'train' subsets of each file. There are no headers, so we get the column names from the file name for subject_, we assign 'activity' to the single column in the y- files, and we get names for the X_ files columns from features.txt. 
+In short: the original data is a single table of observations which has been split by columns in the subject_, X_, and y_ files, and further partitioned by row with the 'test' and 'train' subsets of each file. There are no headers, so we get the column names from the file name for subject_, we assign 'activity' to the single column in the y_ files, and we get names for the X_ files columns from features.txt. 
 
-The original data is first re-assembled in a single table 563 columns X > 10,000 rows, then the table is reduced to the columns of subjectID, activity, and all the features whose name indicates it contains either a mean or standard deviation, for a total of 81. This reduced table is grouped according to the 180 combinations of the 30 humans for 6 activities and the feature variables are averaged for each combination to get the final tidy data. 
+The original data is first re-assembled in a single table of 563 columns by more than 10,000 rows, then the table is reduced to the columns of subjectID, activity, and all the features whose name indicates it contains either a mean or standard deviation, for a total of 81. This reduced table is grouped according to the 180 combinations of the 30 humans for 6 activities and the feature variables are averaged for each combination to get the final tidy data. 
 
-The [run_analysis.R](./run_analysis.R) script performs the above process. See section _Script overview_ in the [README.md](./README.md) file for details. 
+The [run_analysis.R](./run_analysis.R) script performs the above process. See section _Script Overview_ in the [README.md](./README.md) file for details. 
 
 
 ## List of variables: tidy vs. original
 
 For the tidy data set I have selected all the variables which have 'mean' or 'std' in their name from the original data set. As the original names are not valid column names for R, I have removed the characters '(),' from the names and changed '-' to '.'. Also, I have applied 'make.names()' with the 'unique' flag, just to be sure. 
 
-The names under "tidy" below are the variable names of the tidy data set _before_ splitting and averaging on 'subjectID' and 'activity'. The 79 averaged columns have all the names changed by pasting __'Averaged.'__ in front. E.g. "Averaged.tBodyAcc.mean.X", etc. 
+The names under "tidy" below are the variable names of the tidy data set _before_ splitting and averaging on 'subjectID' and 'activity'. The 79 averaged columns have all the names changed by pasting __Averaged.__ in front. E.g. "Averaged.tBodyAcc.mean.X", etc. as in section _Description of Variables_ above.  
 
      "original"						"tidy"
      _______________________________________________________
