@@ -5,9 +5,6 @@ message("Run 'runAnalysis()' to restructure the course project raw data set. (It
 message("Run 'getData()' to download the data ONLY. (It does not replace an existing data set.)")
 message("Run 'cleanUpData()' to remove the raw data set. (NOT run at end of 'runAnalyis()'. Manual clean-up only.)")
 
-# From RStudio, run 
-#     View(read.table("tidy_data.txt", header = TRUE, quote = "\"", sep = "\t"))
-# to see results. 
 
 ## Function 'getData()' downloads the raw data if not already available in the current directory.
 ## 
@@ -49,7 +46,7 @@ cleanUpData <- function(rawDataDirName = "UCI HAR Dataset") {
 ## Function 'runAnalysis()' combines train and test data sets into one and generates the tidy data set
 ##           which contains the average of each variable for each activity and each subject.
 ##
-## Returns the name of the final tidy data set 
+## Prints status messages and the name of the final tidy data set file. 
 ## 
 runAnalysis <- function() {
   
