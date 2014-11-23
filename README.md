@@ -55,7 +55,7 @@ The following is _not_ part of the run_analysis.R procedure. I have run a few op
 ###Summary: 
 
     activity_labels.txt		2 columns: id and activity name; 6 rows. 
-    features.txt			2 columns: id and feature name; 561 rows
+    features.txt			2 columns: id and feature name; 561 rows.
 
 Files in test/ have 2497 rows, those in train/ have 7352 (30/70 split): 
 
