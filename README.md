@@ -1,7 +1,26 @@
 #README
 
+Author: Marco Mesturino, November 2014. 
 
-##Files overview
+This is the repository for my _Getting and Cleaning Data_ course project by Coursera. 
+
+##Files in the repository 
+
+* __.gitignore__  git's list of items NOT under configuration management. (Just ignore it.)
+* __CodeBook.md__ the codebook as uploaded to Coursera. 
+* __README.md__  this very file. 
+* __run_Analysis.R__  the analysis script for this project. (Please, read this.)
+* __tidy_data.txt__ the same _"tidy"_ data set uploaded to Coursera. It contains the results of the analysis script. 
+
+## Original data set
+
+The [original data set](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) comes from the [UCI project](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones) on Human Activity Recognition using smartphones. 
+
+
+
+
+
+##UCI HAR Dataset Files overview
 
 The following is not part of the run_analysis.R procedure. I have run a few operating system commands and an R script to look at important characteristics of the input file. 
 
@@ -18,12 +37,11 @@ Files in test/ have 2497 rows, those in train/ have 7352 (30/70 split):
     						the rows are observation for each row in subject_test.txt
     y_test.txt, y_train.txt	1 col: activity id (1:6) as in activity_labels.txt
 
-The above fits with the discussion and diagram on the Coursera forums, see: 
-[this comment](https://class.coursera.org/getdata-009/forum/thread?thread_id=58#comment-369)
+The above fits with the discussion and the [diagram at the Coursera forums](https://class.coursera.org/getdata-009/forum/thread?thread_id=58#comment-369). 
 
 ###Method: 
 
-Though not used, the function 'countFileFields() is available in my script. It checks the number of fields in files with '.txt' extension in the given directory paths:  
+Though not used, the function 'countFileFields()' is available in my script. It checks the number of fields in files with '.txt' extension in the given directory paths:  
 
     > countFileFields(path = "UCI HAR Dataset", pattern = "\\.txt$")
     No. of fields in UCI HAR Dataset for files: 
@@ -56,5 +74,9 @@ The following commands run OK in a bash shell, which is native in Linux, Unix, M
 
 Total above tells me I have enough memory to load all at once, if needed. 
 
+###Files not used: 
 
+I have not used the files in the 'Inertial Signals' sub-directories of the train and test data sets. They contain 128 variables for the same amount of observations as the other files. From the 'README.txt' and 'features_ info.txt' of the UCI data I gather that these 'Signals' are the original collected data used to generate the 'X _*.txt' files. In any case, they do not have any 'mean' or 'std' in their filenames, so they are not the kind of data required for this project. 
+
+__END of README__ 
 
