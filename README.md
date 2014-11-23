@@ -62,11 +62,13 @@ Steps 1 and 4 are mostly done together. Function mergeRawData() looks at the fil
 
 Since, the feature names are useful also in step 2 to select the columns of interest, mergeRawData() stores the (normalised) column names for the features in a small data frame 'ftDT'. A trick with operator <<- makes the feature names available to other calls of mergeRawData(), -- so as not to load them more than once, and to the scope of runAnalysis() itself. (Just to try it, there are many other ways to do that.) 
 
-Step 3 could be done before or after 3, as it only modifies the values in the 'activity' column. In runAnalysis() this is done by loading the feature names from feature.txt and converting the column to a factor. The call to factor() needs those exact parameters so as not to change neither the mapping from number to activity, nor the ordering of the column. 
+Step 2 just gets the feature column names list loaded by rawDataMerge(), selects those with 'mean' or std', and slices the data frame accordingly. 
 
-Step 5 is just one line with ddplyr(): my heartfelt thanks to the people who mentioned ddplyr() in the forums. Just read the help and set the right parameters and function. 
+Step 3 could be done before or after 2, as it only modifies the values in the 'activity' column. In runAnalysis() this is done by loading the feature names from feature.txt and converting the column to a factor. The call to factor() needs those exact parameters so as not to change neither the mapping from number to activity, nor the ordering of the 'activity' column. 
 
-A little bit of step 4 is done last, to give reasonable names to the averaged variabels. 
+Step 5 is just one line with ddplyr(): my heartfelt thanks to the people who mentioned ddplyr() in the forums. Just read the help and set the right parameters and function. It does exactly what step 5 needs. 
+
+A little bit of step 4 is done last, to give reasonable names to the averaged variables. 
 
 Downloading the original data and writing the results are obvious from the code, I hope. 
 
@@ -89,7 +91,7 @@ Files in test/ have 2497 rows, those in train/ have 7352 (30/70 split):
     						the rows are observation for each row in subject_test.txt
     y_test.txt, y_train.txt	1 col: activity id (1:6) as in activity_labels.txt
 
-The above fits with the discussion and the [diagram at the Coursera forums](https://class.coursera.org/getdata-009/forum/thread?thread_id=58#comment-369). 
+The above fits with the discussion and the [diagram](https://class.coursera.org/getdata-009/forum/thread?thread_id=58#comment-369)  at the Coursera forums. 
 
 ###Method: 
 
