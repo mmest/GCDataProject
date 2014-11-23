@@ -16,13 +16,31 @@ This is the repository for my _Getting and Cleaning Data_ course project by Cour
 
 The [original data set](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) comes from the [UCI project](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones) on Human Activity Recognition using smartphones. 
 
+## Project data set (the _tidy data_ )
+
+Available in file [tidy_data.txt](./) in this repository. Please, see the code book for details. 
+
+## Code book
+
+Please see file [CodeBook.md](./) in this repository. It details the project data set. 
+
+## Analysis script and method
+
+In file [run_analysis.R](./) in this repository. Run it to re-build the _tidy_ data set. 
+
+If you source the script, it will just show you how a list of R functions to run. (I never provide scripts that manipulate data when sourced, as they may mess-up the user's environment. )
+
+### Script overview: 
+
+The fine details are in the code comments in the script. Here I give the general overview: 
 
 
 
 
-##UCI HAR Dataset Files overview
 
-The following is not part of the run_analysis.R procedure. I have run a few operating system commands and an R script to look at important characteristics of the input file. 
+##Appendix: UCI HAR Dataset Files overview
+
+The following is _not_ part of the run_analysis.R procedure. I have run a few operating system commands and an R script to look at important characteristics of the input file. 
 
 ###Summary: 
 
