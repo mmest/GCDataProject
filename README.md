@@ -20,15 +20,25 @@ The [original data set](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectf
 
 Available in file [tidy_data.txt](./) in this repository. Please, see the code book for details. 
 
+If you have the RStudio application, you can view the file like this: 
+
+    View(read.table("tidy_data.txt", header = TRUE, quote = "\"", sep = "\t"))
+ 
 ## Code book
 
-Please see file [CodeBook.md](./) in this repository. It details the project data set. 
+Please see file [CodeBook.md](./) in this repository. It describes the project data set and variables transformation.  
 
 ## Analysis script and method
 
 In file [run_analysis.R](./) in this repository. Run it to re-build the _tidy_ data set. 
 
 If you source the script, it will just show you how a list of R functions to run. (I never provide scripts that manipulate data when sourced, as they may mess-up the user's environment. )
+
+     > source("run_analysis.R")
+     Run 'runAnalysis()' to restructure the course project raw data set. (It will download raw data, if not already available.)
+     Run 'getData()' to download the data ONLY. (It does not replace an existing data set.)
+     Run 'cleanUpData()' to remove the raw data set. (NOT run at end of 'runAnalyis()'. Manual clean-up only.)
+     > 
 
 ### Script overview: 
 
@@ -40,7 +50,7 @@ The fine details are in the code comments in the script. Here I give the general
 
 ##Appendix: UCI HAR Dataset Files overview
 
-The following is _not_ part of the run_analysis.R procedure. I have run a few operating system commands and an R script to look at important characteristics of the input file. 
+The following is _not_ part of the run_analysis.R procedure. I have run a few operating system commands and an R script to look at important characteristics of the input files. 
 
 ###Summary: 
 
