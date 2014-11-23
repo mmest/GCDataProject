@@ -42,7 +42,10 @@ cleanUpData <- function(rawDataDirName = "UCI HAR Dataset") {
 }
 
 
-## Function 'runAnalysis() 
+## Function 'runAnalysis()' combines train and test sets into one and generates the tidy data sets. 
+##
+## Returns the name of the final tidy data set with the average of each variable for each activity and each subject.
+## 
 runAnalysis <- function() {
   
   # Make sure we have the raw data: 
@@ -55,10 +58,18 @@ runAnalysis <- function() {
   dt <- data.frame()
   # Merge of all columns from the test files: 
   dt <- mergeRawData(dt, rawDataDirName, "test")
-  # Merge all cols from the train files, add rows to complete set: 
+  # Merge all cols from the train files, add rows to combined data frame: 
   dt <- rbind(dt, mergeRawData(dt, rawDataDirName, "train"))
   
-  # 
+  # 2. Extracts the measurements on the mean and standard deviation for each measurement:
+  
+  
+  # 3. Load activity ID numbers and descriptive labels from file:  
+  actDT <- read.table(file.path(rawDataDirName, "activity_labels.txt"), 
+                      col.names = c("ID", "label"), comment.char = "")
+  # Convert numeric IDs of the 'activity' column of combined data to a factor whose
+  # levels match the descriptive labels from the file: 
+  dt$activity <- factor(dt$activity, actDT$ID, actDT$label, ordered = FALSE)
   
   # Make the tidy data file: 
   message("... generating tidy data set ...")
@@ -79,11 +90,7 @@ mergeRawData <- function(dt, dirName, setName)  {
   dt <- cbind(dt, 
               read.table(file.path(dirName, setName, paste0("y_", setName, ".txt")), 
                          col.names = "activity", comment.char = "") )
-  # Load activity labels and convert dt$activity: 
-  actDT <- read.table(file.path(dirName, "activity_labels.txt"), 
-                      col.names = c("ID", "label"), comment.char = "")
-  # Last 3 parameter in 'factor()' to keep column order and level mapping: 
-  dt$activity <- factor(dt$activity, actDT$ID, actDT$label, ordered = FALSE)
+
   
   return(dt)
 }
