@@ -18,7 +18,7 @@ The [original data set](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectf
 
 ## Project data set (the _tidy data_ )
 
-Available in file [tidy_data.txt](./) in this repository. Please, see the code book for details. 
+Available in file [tidy_data.txt](./tidy_data.txt) in this repository. Please, see the code book for details. 
 
 If you have the RStudio application, you can view the file like this: 
 
@@ -26,11 +26,11 @@ If you have the RStudio application, you can view the file like this:
  
 ## Code book
 
-Please see file [CodeBook.md](./) in this repository. It describes the project data set and variables transformation.  
+Please see file [CodeBook.md](./CodeBook.md) in this repository. It describes the project data set and variables transformation.  
 
 ## Analysis script and method
 
-In file [run_analysis.R](./) in this repository. Run it to re-build the _tidy_ data set. 
+In file [run_analysis.R](./run_analysis.R) in this repository. Run it to re-build the _tidy_ data set. 
 
 If you source the script, it will just show you how a list of R functions to run. (I never provide scripts that manipulate data when sourced, as they may mess-up the user's environment. )
 
