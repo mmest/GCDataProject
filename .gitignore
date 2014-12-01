@@ -1,6 +1,9 @@
 *~
 .RData
 .Rhistory
+Other stuff
 UCI HAR Dataset
 colnames.txt
 tidy_names.txt
+student*.txt
+*.zip

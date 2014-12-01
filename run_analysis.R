@@ -127,9 +127,10 @@ runAnalysis <- function() {
 } # runAnalysis()
 
 makeTidy <- function(dt) {
-  if (!isTRUE(require(plyr))) 
+  if (!isTRUE(require(plyr))) {
       install.packages("plyr")
-  library(plyr)
+      library(plyr)
+  }
   
   # Split data frame on subject and activity, applies 'mean()' column-wise on unsplitted: 
   dt <- ddply(dt, c("subjectID", "activity"), numcolwise(mean))
